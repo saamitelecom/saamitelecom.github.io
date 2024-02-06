@@ -68,67 +68,25 @@
         <a href="#contact">Contact</a>
     </nav>
 
-    <div id="filter-container">
-        <label for="simDropdown">Choose Sim:</label>
-        <select id="simDropdown">
-            <option value="all">All</option>
-            <option value="banglalink">Banglalink</option>
-            <option value="grammenphone">Grammenphone</option>
-            <option value="robi">Robi</option>
-            <option value="airttel">Airttel</option>
-            <option value="teletalk">Teletalk</option>
-        </select>
-
-        <label for="offerDropdown">Offer:</label>
-        <select id="offerDropdown">
-            <option value="all">All</option>
-            <option value="internet">Internet</option>
-            <option value="calling">Calling minutes</option>
-            <option value="price">Price</option>
-            <option value="validity">Validity</option>
-        </select>
-
-        <button onclick="filterContent()">Filter</button>
-    </div>
-
-    <div id="content">
-        <!-- Content will be dynamically loaded here based on user's filter -->
-    </div>
+<div id="packageInfo"></div>
 
 <script>
-    function filterContent() {
-        const simValue = document.getElementById('simDropdown').value;
-        const offerValue = document.getElementById('offerDropdown').value;
-
-        // Fetch data from data.txt
-        fetch('https://saamitelecom.github.io/data.txt')
-            .then(response => response.json()) // Assuming data.txt contains valid JSON
-            .then(data => {
-                // Filter data based on selected values
-                const filteredData = data.filter(item => {
-                    return (simValue === 'all' || item.sim === simValue) &&
-                           (offerValue === 'all' || item.offer === offerValue);
-                });
-
-                // Display filtered results
-                displayResults(filteredData);
-            })
-            .catch(error => console.error('Error fetching data:', error));
+    // Function to display information in HTML
+    function displayPackageInfo(data) {
+        var packageInfoDiv = document.getElementById("packageInfo");
+        packageInfoDiv.innerHTML = `
+            <p><strong>Operator Name:</strong> ${data.operatorName}</p>
+            <p><strong>Internet Package:</strong> ${data.internetPackage.data}, ${data.internetPackage.talkTime}, ${data.internetPackage.validity}</p>
+            <p><strong>Pricing:</strong> Regular Price: ${data.pricing.regularPrice}, Special Price: ${data.pricing.specialPrice}</p>
+            <p><strong>Buy Code:</strong> ${data.buyCode}</p>
+        `;
     }
 
-    function displayResults(results) {
-        const resultsContainer = document.getElementById('filtered-results');
-        resultsContainer.innerHTML = '';
-
-        if (results.length === 0) {
-            resultsContainer.innerHTML = '<p>No matching results found.</p>';
-        } else {
-            results.forEach(result => {
-                // Customize how you want to display each result
-                resultsContainer.innerHTML += `<p>${result.sim} - ${result.offer}</p>`;
-            });
-        }
-    }
+    // Fetch data from external JSON file
+    fetch('path/to/your/file.json')
+        .then(response => response.json())
+        .then(data => displayPackageInfo(data))
+        .catch(error => console.error('Error fetching data:', error));
 </script>
 
 </body>
