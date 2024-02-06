@@ -1,1 +1,136 @@
-<p>hello bangladesh</p>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Website</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        header {
+            background-color: #007AFF;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+
+        nav {
+            background-color: #333;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        nav a {
+            display: inline-block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        #filter-container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        select {
+            padding: 10px;
+            margin: 5px;
+        }
+
+        #content {
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h3>Your Website Header</h3>
+    </header>
+
+    <nav>
+        <a href="#about">About</a>
+        <a href="#who-we-are">Who We Are</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <div id="filter-container">
+        <label for="simDropdown">Choose Sim:</label>
+        <select id="simDropdown">
+            <option value="all">All</option>
+            <option value="banglalink">Banglalink</option>
+            <option value="grammenphone">Grammenphone</option>
+            <option value="robi">Robi</option>
+            <option value="airttel">Airttel</option>
+            <option value="teletalk">Teletalk</option>
+        </select>
+
+        <label for="offerDropdown">Offer:</label>
+        <select id="offerDropdown">
+            <option value="all">All</option>
+            <option value="internet">Internet</option>
+            <option value="calling">Calling minutes</option>
+            <option value="price">Price</option>
+            <option value="validity">Validity</option>
+        </select>
+
+        <button onclick="filterContent()">Filter</button>
+    </div>
+
+    <div id="content">
+        <!-- Content will be dynamically loaded here based on user's filter -->
+    </div>
+
+<script>
+    function filterContent() {
+        const simValue = document.getElementById('simDropdown').value;
+        const offerValue = document.getElementById('offerDropdown').value;
+
+        // Fetch data from data.txt
+        fetch('https://saamitelecom.github.io/data.txt')
+            .then(response => response.json()) // Assuming data.txt contains valid JSON
+            .then(data => {
+                // Filter data based on selected values
+                const filteredData = data.filter(item => {
+                    return (simValue === 'all' || item.sim === simValue) &&
+                           (offerValue === 'all' || item.offer === offerValue);
+                });
+
+                // Display filtered results
+                displayResults(filteredData);
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    }
+
+    function displayResults(results) {
+        const resultsContainer = document.getElementById('filtered-results');
+        resultsContainer.innerHTML = '';
+
+        if (results.length === 0) {
+            resultsContainer.innerHTML = '<p>No matching results found.</p>';
+        } else {
+            results.forEach(result => {
+                // Customize how you want to display each result
+                resultsContainer.innerHTML += `<p>${result.sim} - ${result.offer}</p>`;
+            });
+        }
+    }
+</script>
+
+</body>
+
+</html>
