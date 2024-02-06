@@ -1,1 +1,9 @@
-
+[
+  { "sim": "banglalink", "offer": "internet", "details": "Some details about the internet offer" },
+  { "sim": "grammenphone", "offer": "calling", "details": "Some details about the calling offer" },
+  { "sim": "robi", "offer": "price", "details": "Some details about the price offer" },
+  { "sim": "airttel", "offer": "validity", "details": "Some details about the validity offer" },
+  { "sim": "teletalk", "offer": "internet", "details": "Some details about another internet offer" },
+  { "sim": "banglalink", "offer": "price", "details": "Some details about another price offer" },
+  // Add more entries as needed
+]
