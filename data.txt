@@ -1,12 +1,13 @@
 {
   "operatorName": "Example Operator",
   "internetPackage": {
-    "dataLimit": "50GB",
-    "validity": "30Days"
+    "data": "25GB Internet",
+    "talkTime": "20Min",
+    "validity": "356Days"
   },
-  "talkTime": "120Minutes",
   "pricing": {
-    "regularPrice": "500BDT",
-    "offerPrice": "300BDT"
-  }
+    "regularPrice": "200BDT",
+    "specialPrice": "100BD"
+  },
+  "buyCode": "Xyz"
 }
