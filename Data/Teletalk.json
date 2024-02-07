@@ -1,1 +1,13 @@
-Teletalk
+{
+  "operatorName": "Example Operator",
+  "internetPackage": {
+    "data": "25GB Internet",
+    "talkTime": "20Min",
+    "validity": "356Days"
+  },
+  "pricing": {
+    "regularPrice": "200BDT",
+    "specialPrice": "100BD"
+  },
+  "buyCode": "Xyz"
+}
